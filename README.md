@@ -64,7 +64,9 @@ If you just want the `<name>` node and you have the `XmlElement` for the `<book>
 
     var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
 
-* `valueWithPath(path)` - just like `descendantWithPath`, but goes deeper and extracts the `val` of the node. Example:
+* `valueWithPath(path)` - just like `descendantWithPath`, but goes deeper and extracts the `val` of the node.
+
+Example:
 
     var authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
 
