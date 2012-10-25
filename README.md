@@ -5,7 +5,7 @@
 
 For more on why I wrote this class, see the [blog post][blog].
 
-  [blog]: http://nfarina.com
+  [blog]: http://nfarina.com/post/34302964969/a-lightweight-xml-document-class-for-nodejs-javascript
 
 ## Installation
 
