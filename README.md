@@ -50,7 +50,9 @@ All methods with `child` in the name operate only on direct children; they do no
 
 * `childWithAttribute(name,value)` - searches for the first child with the given attribute value. You can omit `value` to just find the first node with the given attribute defined at all.
 
-* `descendantWithPath(path)` - searches for a specific "path" uses dot notation. An example:
+* `descendantWithPath(path)` - searches for a specific "path" uses dot notation.
+
+Example:
 
     <book>
       <author>
