@@ -42,17 +42,25 @@ Each member defaults to a sensible "empty" value like `{}` for `attr`, `[]` for 
 
 All methods with `child` in the name operate only on direct children; they do not do a deep/recursive search.
 
-* `eachChild(func)` - similar to [underscore's][underscore] `each` method, it will call `func(child, index, array)` for each child of the given node.
+### eachChild(func)
 
-* `childNamed(name)` - pass it the name of a child node and it will search for and return the first one found, or `undefined`.
+Similar to [underscore's][underscore] `each` method, it will call `func(child, index, array)` for each child of the given node.
 
-* `childrenNamed(name)` - like `childNamed` but returns all matching children in an array, or `[]`.
+### childNamed(name)
 
-* `childWithAttribute(name,value)` - searches for the first child with the given attribute value. You can omit `value` to just find the first node with the given attribute defined at all.
+Pass it the name of a child node and it will search for and return the first one found, or `undefined`.
 
-* `descendantWithPath(path)` - searches for a specific "path" uses dot notation.
+### childrenNamed(name)
 
-Example:
+Like `childNamed` but returns all matching children in an array, or `[]`.
+
+### childWithAttribute(name,value)
+
+Searches for the first child with the given attribute value. You can omit `value` to just find the first node with the given attribute defined at all.
+
+### descendantWithPath(path)
+
+Searches for a specific "path" uses dot notation. Example:
 
     <book>
       <author>
@@ -66,9 +74,9 @@ If you just want the `<name>` node and you have the `XmlElement` for the `<book>
 
     var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
 
-* `valueWithPath(path)` - just like `descendantWithPath`, but goes deeper and extracts the `val` of the node.
+### valueWithPath(path)
 
-Example:
+Just like `descendantWithPath`, but goes deeper and extracts the `val` of the node. Example:
 
     var authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
 
@@ -78,7 +86,19 @@ You can also use the `@` character to request the value of a particular _attribu
 
 This is not [XPath][]! It's just a thing I made up, OK?
 
-* `toString()` - this is just an override of the standard JavaScript method, it will give you the pretty-printed string representation of your XML document or element. Note that this is for debugging only! It will truncate any long node values.
+### toString()
+
+This is just an override of the standard JavaScript method, it will give you the pretty-printed string representation of your XML document or element. Note that this is for debugging only! It will truncate any long node values.
+  
+    var xml = "<author><name>looooooong value</name></author>";
+    console.log("My document: \n" + new XmlDocument(xml))
+
+Prints:
+
+    My Document:
+    <hello>
+      loooooooo…
+    </hello>
 
 ## Feedback
 
