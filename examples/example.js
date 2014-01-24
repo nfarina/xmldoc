@@ -8,7 +8,7 @@ var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></s
 
 var suggestions = new XmlDocument(xmlString);
 
-// Demonstrate how toString() will pretty-print an abbreviated version of the XML for debugging
+// Demonstrate how toString() will pretty-print the XML for debugging
 console.log("Parsed: \n%s", suggestions);
 
 // Demonstrate a simple eachChild() loop, printing our book titles
@@ -28,6 +28,9 @@ fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
 
   // Parse the XML
   var results = new XmlDocument(data);
+
+  // Demonstrate toString() with an option to abbreviate long strings and compress the output
+  console.log("Parsed: \n%s", results.toString({trimmed:true, compressed:true}));
 
   // Pull out the <books> node
   var books = results.childNamed("books");

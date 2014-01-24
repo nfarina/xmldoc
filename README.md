@@ -86,12 +86,19 @@ You can also use the `@` character to request the value of a particular _attribu
 
 This is not [XPath][]! It's just a thing I made up, OK?
 
-### toString()
+### toString([options])
 
-This is just an override of the standard JavaScript method, it will give you the pretty-printed string representation of your XML document or element. Note that this is for debugging only! It will truncate any long node values.
-  
+This is just an override of the standard JavaScript method, it will give you a string representation of your XML document or element. Note that this is for debugging only! It is not guaranteed to always output valid XML.
+
+The default implementation of `toString()`, that is, the one you get when you just `console.log("Doc: " + myDoc)` will pretty-print the XML with linebreaks and indents. You can pass a couple options to control the output:
+
+    xml.toString({compressed:true}) // strips indents and linebreaks
+    xml.toString({trimmed:true}) // trims long strings for easier debugging
+
+Putting it all together:
+
     var xml = "<author><name>looooooong value</name></author>";
-    console.log("My document: \n" + new XmlDocument(xml))
+    console.log("My document: \n" + new XmlDocument(xml).toString(trimmed:true))
 
 Prints:
 
