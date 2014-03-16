@@ -35,6 +35,7 @@ Both `XmlElement` and `XmlDocument` contain the same members and methods you can
 * `attr` - an object dict containing attribute properties, like `bookNode.attr.title` for `<book title="...">`.
 * `val` - the string "value" of the node, if any, like "world" for `<hello>world</hello>`.
 * `children` - an array of `XmlElement` children of the node.
+* `firstChild`, `lastChild` - pretty much what it sounds like; null if no children
 
 Each member defaults to a sensible "empty" value like `{}` for `attr`, `[]` for `children`, and `""` for `val`.
 
