@@ -35,6 +35,9 @@ fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
   // Pull out the <books> node
   var books = results.childNamed("books");
 
+  // Demonstrate firstChild/lastChild
+  console.log("First book has ISBN '%s', last book has ISBN '%s'", books.firstChild.attr.isbn, books.lastChild.attr.isbn);
+
   // Print out the ISBNs
   books.eachChild(function (book) {
     console.log("Found book with ISBN '%s'", book.attr.isbn);
