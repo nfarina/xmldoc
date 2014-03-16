@@ -1,2 +1,6 @@
 # Ignore dependencies
 node_modules
+
+# IntelliJ
+.idea
+*.iml

@@ -4,7 +4,7 @@
 var XmlDocument = require('../lib/xmldoc').XmlDocument;
 
 // Demonstrate parsing an in-memory XML string
-var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
+var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
 
 var suggestions = new XmlDocument(xmlString);
 
@@ -18,7 +18,7 @@ suggestions.eachChild(function(book) {
 
 // Now load an XML file from disk and parse it
 var fs = require('fs'),
-    path = require('path')
+    path = require('path');
 
 fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
   
@@ -47,9 +47,10 @@ fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
   console.log("Found %s books.", allBooks.length);
 
   // Search for a particular book
-  twilight = books.childWithAttribute("isbn","478-2-23-765712-2");
+  var twilight = books.childWithAttribute("isbn","478-2-23-765712-2");
 
   // Result is a single XmlElement instance for <book>
   console.log("Title of book with given ISBN: '%s'", twilight.valueWithPath("title"));
 
+  return null;
 });
