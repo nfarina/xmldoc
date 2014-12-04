@@ -61,7 +61,7 @@ Searches for the first child with the given attribute value. You can omit `value
 
 ### descendantWithPath(path)
 
-Searches for a specific "path" uses dot notation. Example:
+Searches for a specific "path" using dot notation. Example:
 
     <book>
       <author>
