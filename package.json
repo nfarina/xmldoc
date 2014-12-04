@@ -6,7 +6,7 @@
     "email": "nfarina@gmail.com",
     "url": "http://nfarina.com"
   },
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "./index",
   "dependencies": {
     "sax": "~0.6.1"
