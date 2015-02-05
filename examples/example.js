@@ -14,6 +14,7 @@ console.log("Parsed: \n%s", suggestions);
 // Demonstrate a simple eachChild() loop, printing our book titles
 suggestions.eachChild(function(book) {
   console.log("Found book with title: '%s'", book.attr.title);
+  console.log("==> The <book> tag started at position %s and the complete element ended at line %s, column %s, position %s.", book.startTagPosition, book.line, book.column, book.position);
 });
 
 // Now load an XML file from disk and parse it
