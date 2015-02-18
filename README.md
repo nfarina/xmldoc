@@ -31,7 +31,7 @@ Both `XmlElement` and `XmlDocument` contain the same members and methods you can
 
 ## Members
 
-* `name` - the node name, like "tat" for `<tat>`.
+* `name` - the node name, like "tat" for `<tat>`. XML "namespaces" are ignored by the underlying [sax-js](https://github.com/isaacs/sax-js) parser, so you'll simply get "office:body" for `<office:body>`.
 * `attr` - an object dict containing attribute properties, like `bookNode.attr.title` for `<book title="...">`.
 * `val` - the string "value" of the node, if any, like "world" for `<hello>world</hello>`.
 * `children` - an array of `XmlElement` children of the node.
