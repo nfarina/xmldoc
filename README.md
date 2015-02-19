@@ -18,11 +18,11 @@ Or just download the repository and include it in your `node_modules` directly. 
 ## Usage
 
 ```js
-    var xmldoc = require('../lib/xmldoc');
+var xmldoc = require('../lib/xmldoc');
 
-    var document = new xmldoc.XmlDocument("<some>xml</some>");
+var document = new xmldoc.XmlDocument("<some>xml</some>");
 
-    ... do things
+// do things
 ```
 
 ## Classes
@@ -67,19 +67,19 @@ Searches for the first child with the given attribute value. You can omit `value
 Searches for a specific "path" using dot notation. Example:
 
 ```xml
-    <book>
-      <author>
-        <name isProper="true">George R. R. Martin</name>
-        ...
-      </author>
-      ...
-    </book>
+<book>
+  <author>
+    <name isProper="true">George R. R. Martin</name>
+    ...
+  </author>
+  ...
+</book>
 ```
 
 If you just want the `<name>` node and you have the `XmlElement` for the `<book>` node, you can say:
 
 ```js
-    var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
+var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
 ```
 
 ### valueWithPath(path)
@@ -87,13 +87,13 @@ If you just want the `<name>` node and you have the `XmlElement` for the `<book>
 Just like `descendantWithPath`, but goes deeper and extracts the `val` of the node. Example:
 
 ```js
-    var authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
+var authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
 ```
 
 You can also use the `@` character to request the value of a particular _attribute_ instead:
 
 ```js
-    var authorIsProper = bookNode.valueWithPath("author.name@isProper"); // return "true"
+var authorIsProper = bookNode.valueWithPath("author.name@isProper"); // return "true"
 ```
 
 This is not [XPath][]! It's just a thing I made up, OK?
@@ -105,15 +105,15 @@ This is just an override of the standard JavaScript method, it will give you a s
 The default implementation of `toString()`, that is, the one you get when you just `console.log("Doc: " + myDoc)` will pretty-print the XML with linebreaks and indents. You can pass a couple options to control the output:
 
 ```js
-    xml.toString({compressed:true}) // strips indents and linebreaks
-    xml.toString({trimmed:true}) // trims long strings for easier debugging
+xml.toString({compressed:true}) // strips indents and linebreaks
+xml.toString({trimmed:true}) // trims long strings for easier debugging
 ```
 
 Putting it all together:
 
 ```js
-    var xml = "<author><name>looooooong value</name></author>";
-    console.log("My document: \n" + new XmlDocument(xml).toString(trimmed:true))
+var xml = "<author><name>looooooong value</name></author>";
+console.log("My document: \n" + new XmlDocument(xml).toString(trimmed:true))
 ```
 
 Prints:
