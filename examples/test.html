@@ -7,12 +7,32 @@
   <script type="text/javascript" src="../lib/xmldoc.js"></script>
   <script type="text/javascript">
     // Demonstrate parsing an in-memory XML string
-    var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
+    var xmlString = [
+      '<suggestions>',
+        '<book title="Twilight"/>',
+        '<book title="Twister"/>',
+      '</suggestions>'
+      ].join('');
 
     var suggestions = new XmlDocument(xmlString);
 
+    // Demonstrate parsing an XML string with text-nodes
+    // with 'textasnode' option that puts them into their own nodes.
+    // Useful when you need to traverse a tree and know the exact order.
+    var ttmlString = [
+      '<p begin="..." dur="..." style="left">',
+        '<span style="italic">',
+          '-Officer Jason Stackhouse.',
+        '</span>',
+        '<br />',
+        '-Where are you? You have to help.</p>'
+      ].join('');
+
+    var captions = new XmlDocument(ttmlString, {textasnode:true});
+
     // Demonstrate how toString() will pretty-print an abbreviated version of the XML for debugging
     console.log("Parsed: \n" + suggestions);
+    console.log("Parsed: \n" + captions);
 
     // Demonstrate a simple eachChild() loop, printing our book titles
     suggestions.eachChild(function(book) {

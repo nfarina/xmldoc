@@ -20,8 +20,19 @@ Or just download the repository and include it in your `node_modules` directly. 
     var xmldoc = require('../lib/xmldoc');
 
     var document = new xmldoc.XmlDocument("<some>xml</some>");
+    var docWithArgs = new xmldoc.XmlDocument("<some>xml</some>", options);
 
     ... do things
+
+## Arguments
+The XmlDocument function passes on options to the sax parser.  
+Besides whats defined in the ['sax'][sax] docs, these are defined:
+
+`textasnode` - Boolean. Turns text into nodes. Default: `false`
+
+`textnodename` - String. Set node-name for text. Default `text`
+
+See [test.html](examples/test.html) for example usage
 
 ## Classes
 
