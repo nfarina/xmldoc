@@ -46,6 +46,10 @@ Each member defaults to a sensible "empty" value like `{}` for `attr`, `[]` for 
 
 All methods with `child` in the name operate only on direct children; they do not do a deep/recursive search.
 
+It's important to note that `xmldoc` is designed for when you know exactly what you want from your XML file. For instance, it's great for parsing API responses with known structures, but it's not great at teasing things out of HTML documents from the web.
+
+If you need to do lots of searching through your XML document, I highly recommend trying a different library like [node-elementtree](https://github.com/racker/node-elementtree).
+
 ### eachChild(func)
 
 Similar to [underscore's][underscore] `each` method, it will call `func(child, index, array)` for each child of the given node.
