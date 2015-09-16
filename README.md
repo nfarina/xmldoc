@@ -117,7 +117,7 @@ Putting it all together:
 
 ```js
 var xml = "<author><name>looooooong value</name></author>";
-console.log("My document: \n" + new XmlDocument(xml).toString(trimmed:true))
+console.log("My document: \n" + new XmlDocument(xml).toString({trimmed:true}))
 ```
 
 Prints:
