@@ -111,6 +111,7 @@ The default implementation of `toString()`, that is, the one you get when you ju
 ```js
 xml.toString({compressed:true}) // strips indents and linebreaks
 xml.toString({trimmed:true}) // trims long strings for easier debugging
+xml.toString({preserveWhitespace:true}) // prevents whitespace being removed from around element values
 ```
 
 Putting it all together:
