@@ -1,4 +1,6 @@
 
+![](https://travis-ci.org/nfarina/xmldoc.svg)
+
 ## Introduction
 
 `xmldoc` lets you parse XML documents with ease. It's a pure-JavaScript, one-file XML document class with a single dependency on the excellent [`sax`][sax] parser.
