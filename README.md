@@ -1,5 +1,6 @@
 
-![](https://travis-ci.org/nfarina/xmldoc.svg) ![](https://coveralls.io/repos/github/nfarina/xmldoc/badge.svg?branch=master)
+[![Build Status](https://travis-ci.org/nfarina/xmldoc.svg)](https://travis-ci.org/nfarina/xmldoc)
+[![Coverage Status](https://coveralls.io/repos/github/nfarina/xmldoc/badge.svg?branch=master)](https://coveralls.io/github/nfarina/xmldoc?branch=master)
 
 ## Introduction
 
