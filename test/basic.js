@@ -45,6 +45,7 @@ t.test('parse xml', function (t) {
   var parsed = new XmlDocument(xmlString);
   t.ok(parsed);
   t.throws(function() { new XmlDocument(); });
+  t.throws(function() { new XmlDocument("  "); });
   t.end();
 })
 
