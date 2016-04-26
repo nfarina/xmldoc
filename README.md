@@ -1,5 +1,5 @@
 
-![](https://travis-ci.org/nfarina/xmldoc.svg)
+![](https://travis-ci.org/nfarina/xmldoc.svg) ![](https://coveralls.io/repos/github/nfarina/xmldoc/badge.svg?branch=master)
 
 ## Introduction
 
