@@ -1,9 +1,5 @@
 # Ignore dependencies
-node_modules
+node_modules/
 
-# IntelliJ
-.idea
-*.iml
-
-# NPM Cruft
-npm-debug.log
+# Code Coverage
+coverage/
