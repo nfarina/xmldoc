@@ -6,7 +6,7 @@
     "email": "nfarina@gmail.com",
     "url": "http://nfarina.com"
   },
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "./index",
   "scripts": {
     "test": "tap test/*.js",
