@@ -66,6 +66,10 @@ t.test('doctype handling', function (t) {
   var docWithoutType = new XmlDocument('<hello>world</hello>');
   t.equal(docWithoutType.doctype, "");
 
+  t.throws(function() {
+    new XmlDocument('<hello><!DOCTYPE HelloWorld>world</hello>');
+  });
+
   t.end();
 })
 
