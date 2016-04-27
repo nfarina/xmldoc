@@ -54,6 +54,16 @@ t.test('cdata handling', function (t) {
   var xmlString = '<hello><![CDATA[<world>]]></hello>';
   var parsed = new XmlDocument(xmlString);
   t.equal(parsed.val, "<world>");
+  t.equal(parsed.isValCdata, true);
+  t.end();
+})
+
+t.test('comment handling', function (t) {
+  
+  var xmlString = '<hello><!-- World --></hello>';
+  var parsed = new XmlDocument(xmlString);
+  t.equal(parsed.val, " World ");
+  t.equal(parsed.isValComment, true);
   t.end();
 })
 
