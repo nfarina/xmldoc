@@ -58,6 +58,17 @@ t.test('cdata handling', function (t) {
   t.end();
 })
 
+t.test('doctype handling', function (t) {
+  
+  var docWithType = new XmlDocument('<!DOCTYPE HelloWorld><hello>world</hello>');
+  t.equal(docWithType.doctype, " HelloWorld");
+  
+  var docWithoutType = new XmlDocument('<hello>world</hello>');
+  t.equal(docWithoutType.doctype, "");
+
+  t.end();
+})
+
 t.test('comment handling', function (t) {
   
   var xmlString = '<hello><!-- World --></hello>';
