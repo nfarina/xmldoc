@@ -5,6 +5,10 @@ t.test('parsing comments outside XML scope [#27]', function (t) {
   
   var xmlString = '<hello>world</hello>\n<!--Thank you for your business!-->';
   var parsed = new XmlDocument(xmlString);
+  
+  // verify that the trailing comment is ignored (no sensible place to put it)
+  t.equal(parsed.toString(), '<hello>world</hello>');
+  
   t.end();
 })
 
