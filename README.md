@@ -12,7 +12,7 @@ For more on why I wrote this class, see the [blog post][blog].
 
 ## Release Notes
 
-See [CHANGELOG.md](./CHANGELOG.md) for details.
+See [CHANGELOG.md](./CHANGELOG.md) for details (built with [GitHub Changelog Generator](https://skywinder.github.io/github-changelog-generator/)).
 
 ## Installation
 

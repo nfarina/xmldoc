@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.5.1](https://github.com/nfarina/xmldoc/tree/v0.5.1) (2016-05-12)
+[Full Changelog](https://github.com/nfarina/xmldoc/compare/v0.5.0...v0.5.1)
+
+**Closed issues:**
+
+- Release notes for 0.5 [\#35](https://github.com/nfarina/xmldoc/issues/35)
+
+**Merged pull requests:**
+
+- GLOBAL is producing deprecation warnings in node V6 [\#36](https://github.com/nfarina/xmldoc/pull/36) ([jmalins](https://github.com/jmalins))
+
 ## [v0.5.0](https://github.com/nfarina/xmldoc/tree/v0.5.0) (2016-04-27)
 [Full Changelog](https://github.com/nfarina/xmldoc/compare/v0.4.0...v0.5.0)
 
