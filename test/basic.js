@@ -10,7 +10,7 @@ t.test('verify sax global in browser', function (t) {
   delete require.cache[require.resolve('../lib/xmldoc.js')];
   
   // this signal will be picked up on by xmldoc.js
-  GLOBAL.xmldocAssumeBrowser = true;
+  global.xmldocAssumeBrowser = true;
 
   t.throws(function() {
     require('../');
@@ -19,9 +19,9 @@ t.test('verify sax global in browser', function (t) {
   // try again, but this time satisfy the sax check
   delete require.cache[require.resolve('../')];
   delete require.cache[require.resolve('../lib/xmldoc.js')];
-  GLOBAL.sax = {};
+  global.sax = {};
   require('../');
-  t.ok(GLOBAL.XmlDocument);
+  t.ok(global.XmlDocument);
   
   t.end();
 })
