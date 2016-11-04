@@ -22,7 +22,7 @@ var fs = require('fs'),
     path = require('path');
 
 fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
-  
+
   if (err) {
     return console.log(err);
   }
@@ -57,4 +57,18 @@ fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
   console.log("Title of book with given ISBN: '%s'", twilight.valueWithPath("title"));
 
   return null;
+});
+
+fs.readFile(path.join(__dirname, "mixed.xml"), 'utf8', function (err,data) {
+
+  if (err) {
+    return console.log(err);
+  }
+
+  // Parse the XML
+  var results = new XmlDocument(data);
+  results.mixedChildren.forEach((c,i) => {
+    console.log('Child number: ' + i)
+    console.log(c)
+  })
 });
