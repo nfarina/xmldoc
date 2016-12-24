@@ -112,6 +112,66 @@ t.test('text with elements handling', function (t) {
   t.end();
 })
 
+t.test('text before root node', function (t) {
+
+  var xmlString = '\n\n<hello>*</hello>';
+  var xml = new XmlDocument(xmlString);
+
+  t.equal(xml.val, '*');
+  t.equal(xml.children.length, 1);
+  t.end();
+})
+
+t.test('text after root node', function (t) {
+
+  var xmlString = '<hello>*</hello>\n\n';
+  var xml = new XmlDocument(xmlString);
+
+  t.equal(xml.val, '*');
+  t.equal(xml.children.length, 1);
+  t.end();
+})
+
+t.test('text before root node with version', function (t) {
+
+  var xmlString = '<?xml version="1.0"?>\n\n<hello>*</hello>';
+  var xml = new XmlDocument(xmlString);
+
+  t.equal(xml.val, '*');
+  t.equal(xml.children.length, 1);
+  t.end();
+})
+
+t.test('text after root node with version', function (t) {
+
+  var xmlString = '<?xml version="1.0"?><hello>*</hello>\n\n';
+  var xml = new XmlDocument(xmlString);
+
+  t.equal(xml.val, '*');
+  t.equal(xml.children.length, 1);
+  t.end();
+})
+
+t.test('comment before root node', function (t) {
+
+  var xmlString = '<!-- hello --><world>*</world>';
+  var xml = new XmlDocument(xmlString);
+
+  t.equal(xml.val, '*');
+  t.equal(xml.children.length, 1);
+  t.end();
+})
+
+t.test('comment after root node', function (t) {
+
+  var xmlString = '<hello>*</hello><!-- world -->';
+  var xml = new XmlDocument(xmlString);
+
+  t.equal(xml.val, '*');
+  t.equal(xml.children.length, 1);
+  t.end();
+})
+
 t.test('error handling', function (t) {
 
   var xmlString = '<hello><unclosed-tag></hello>';
