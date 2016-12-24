@@ -158,9 +158,46 @@ t.test('eachChild', function (t) {
   t.end();
 })
 
+t.test('eachChild with text and comments', function (t) {
+
+  var xmlString = '<books><book title="Twilight"/>text!<book title="Twister"/><!--comment!--></books>';
+  var books = new XmlDocument(xmlString);
+
+  expectedTitles = ["Twilight", "Twister"];
+
+  var elI = 0;
+
+  books.eachChild(function(book, i, books) {
+    t.equal(book.attr.title, expectedTitles[elI++]);
+  });
+
+  called = 0;
+  books.eachChild(function(book, i, books) {
+    called++;
+    return false; // test that returning false short-circuits the loop
+  });
+  t.equal(called, 1);
+
+  t.end();
+})
+
 t.test('childNamed', function (t) {
 
   var xmlString = '<books><book/><good-book/></books>';
+  var books = new XmlDocument(xmlString);
+
+  var goodBook = books.childNamed('good-book');
+  t.equal(goodBook.name, 'good-book');
+
+  var badBook = books.childNamed('bad-book');
+  t.equal(badBook, undefined);
+
+  t.end();
+})
+
+t.test('childNamed with text', function (t) {
+
+  var xmlString = '<books><book/>text<good-book/></books>';
   var books = new XmlDocument(xmlString);
 
   var goodBook = books.childNamed('good-book');
@@ -202,6 +239,24 @@ t.test('childWithAttribute', function (t) {
   t.end();
 })
 
+t.test('childWithAttribute with text', function (t) {
+
+  var xmlString = '<fruits><apple pick="no"/><orange rotten="yes"/>text<apple pick="yes"/><banana/></fruits>';
+  var fruits = new XmlDocument(xmlString);
+
+  var pickedFruit = fruits.childWithAttribute('pick', 'yes');
+  t.equal(pickedFruit.name, 'apple');
+  t.equal(pickedFruit.attr.pick, 'yes');
+
+  var rottenFruit = fruits.childWithAttribute('rotten');
+  t.equal(rottenFruit.name, 'orange');
+
+  var peeled = fruits.childWithAttribute('peeled');
+  t.equal(peeled, undefined);
+
+  t.end();
+})
+
 t.test('descendantWithPath', function (t) {
 
   var xmlString = '<book><author><first>George R.R.</first><last>Martin</last></author></book>';
@@ -219,9 +274,43 @@ t.test('descendantWithPath', function (t) {
   t.end();
 })
 
+t.test('descendantWithPath with text', function (t) {
+
+  var xmlString = '<book><author>text<first>George R.R.</first><last>Martin</last></author></book>';
+  var book = new XmlDocument(xmlString);
+
+  var lastNameNode = book.descendantWithPath('author.last');
+  t.equal(lastNameNode.val, 'Martin');
+
+  var middleNameNode = book.descendantWithPath('author.middle');
+  t.equal(middleNameNode, undefined);
+
+  var publisherNameNode = book.descendantWithPath('publisher.first');
+  t.equal(publisherNameNode, undefined);
+
+  t.end();
+})
+
 t.test('valueWithPath', function (t) {
 
   var xmlString = '<book><author><first>George R.R.</first><last hyphenated="no">Martin</last></author></book>';
+  var book = new XmlDocument(xmlString);
+
+  var lastName = book.valueWithPath('author.last');
+  t.equal(lastName, 'Martin');
+
+  var lastNameHyphenated = book.valueWithPath('author.last@hyphenated');
+  t.equal(lastNameHyphenated, "no");
+
+  var publisherName = book.valueWithPath('publisher.last@hyphenated');
+  t.equal(publisherName, undefined);
+
+  t.end();
+})
+
+t.test('valueWithPath with text', function (t) {
+
+  var xmlString = '<book><author>text<first>George R.R.</first><last hyphenated="no">Martin</last></author></book>';
   var book = new XmlDocument(xmlString);
 
   var lastName = book.valueWithPath('author.last');
