@@ -6,14 +6,14 @@
     "email": "nfarina@gmail.com",
     "url": "http://nfarina.com"
   },
-  "version": "0.5.1",
+  "version": "1.0.0",
   "main": "./index",
   "scripts": {
     "test": "tap test/*.js",
     "coverage": "npm test -- --cov --coverage-report=html"
   },
   "dependencies": {
-    "sax": "~1.1.1"
+    "sax": "^1.2.1"
   },
   "license": {
     "type": "MIT",
@@ -35,6 +35,6 @@
   ],
   "readmeFilename": "README.md",
   "devDependencies": {
-    "tap": "^5.7.1"
+    "tap": "^8.0.1"
   }
 }
