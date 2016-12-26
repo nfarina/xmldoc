@@ -22,6 +22,12 @@ Or just download the repository and include it in your `node_modules` directly. 
 
   [blob]: https://github.com/nfarina/xmldoc/blob/master/lib/xmldoc.js
 
+## Installation - React Native
+
+I haven't tested this myself but [installing `buffer` and `stream` separately](https://github.com/nfarina/xmldoc/issues/38) may be necessary for `xmldoc` to work on React Native:
+
+    npm install buffer stream xmldoc
+
 ## Usage
 
 ```js
