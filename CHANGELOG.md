@@ -1,5 +1,20 @@
 # Change Log
 
+## [v1.0.0](https://github.com/nfarina/xmldoc/tree/v1.0.0) (2016-12-26)
+[Full Changelog](https://github.com/nfarina/xmldoc/compare/v0.5.1...v1.0.0)
+
+**Closed issues:**
+
+- Excellent library with a beautiful, clean API [\#42](https://github.com/nfarina/xmldoc/issues/42)
+- Order of elements changed [\#41](https://github.com/nfarina/xmldoc/issues/41)
+- While writing back xml document to a file it removes all comments [\#39](https://github.com/nfarina/xmldoc/issues/39)
+- react native using xmldoc to parser xml  [\#38](https://github.com/nfarina/xmldoc/issues/38)
+- Order of val in relation to children? [\#37](https://github.com/nfarina/xmldoc/issues/37)
+
+**Merged pull requests:**
+
+- Fix CData overwriting bug [\#43](https://github.com/nfarina/xmldoc/pull/43) ([calebmer](https://github.com/calebmer))
+
 ## [v0.5.1](https://github.com/nfarina/xmldoc/tree/v0.5.1) (2016-05-12)
 [Full Changelog](https://github.com/nfarina/xmldoc/compare/v0.5.0...v0.5.1)
 
