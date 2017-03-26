@@ -31,7 +31,7 @@ I haven't tested this myself but [installing `buffer` and `stream` separately](h
 ## Usage
 
 ```js
-var xmldoc = require('../lib/xmldoc');
+var xmldoc = require('xmldoc');
 
 var document = new xmldoc.XmlDocument("<some>xml</some>");
 
