@@ -197,6 +197,24 @@ t.test('tag locations', function (t) {
   t.end();
 })
 
+t.test('text locations', function (t) {
+
+  var xmlString = '<books><book title="Twilight">I&apos;d never given much thought to how I would die - though I&apos;d never had reason enough in the last few months - but even if I had, I would not have imagined i like this.</book> Books are grand.</books>';
+  var books = new XmlDocument(xmlString);
+
+  var bookText = books.children[0].children[0];
+  t.equal(bookText.text, "I'd never given much thought to how I would die - though I'd never had reason enough in the last few months - but even if I had, I would not have imagined i like this.");
+  t.equal(bookText.position, 207);
+
+  var booksText= books.children[1];
+  t.equal(booksText.text, " Books are grand.");
+  t.equal(booksText.position, 231);
+
+  t.end();
+
+});
+
+
 t.test('eachChild', function (t) {
 
   var xmlString = '<books><book title="Twilight"/><book title="Twister"/></books>';
