@@ -212,7 +212,7 @@ t.test('text locations', function (t) {
 
   t.end();
 
-})
+});
 
 
 t.test('eachChild', function (t) {
