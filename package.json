@@ -12,7 +12,7 @@
     "test": "tap test/*.js",
     "coverage": "npm test -- --cov --coverage-report=html"
   },
-  "license": "https://raw.github.com/nfarina/xmldoc-js/master/LICENSE",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/nfarina/xmldoc.git"
