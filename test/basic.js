@@ -317,6 +317,22 @@ t.test('childWithAttribute with text', function (t) {
   t.end();
 })
 
+t.test('descendantsNamed', function (t) {
+
+  var xmlString = '<navigation><item id="1"/><divider/><item id="2"><item id="2.1"/><item id="2.2"><item id="2.2.1"/></item><divider/><item id="3"/></item></navigation>';
+  var navigation = new XmlDocument(xmlString);
+
+  var items = navigation.descendantsNamed('item');
+  t.equal(items.length, 6);
+  t.equal(items[0].attr.id, '1');
+  t.equal(items[1].attr.id, '2');
+  t.equal(items[2].attr.id, '2.1');
+  t.equal(items[3].attr.id, '2.2');
+  t.equal(items[4].attr.id, '2.2.1');
+  t.equal(items[5].attr.id, '3');
+  t.end();
+})
+
 t.test('descendantWithPath', function (t) {
 
   var xmlString = '<book><author><first>George R.R.</first><last>Martin</last></author></book>';
