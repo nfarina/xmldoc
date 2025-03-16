@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    // Only include Node.js libraries
+    "lib": ["ESNext"],
+
+    // Target a more broadly compatible version
+    "target": "ES2018",
+
+    // CommonJS for Node.js compatibility
+    "module": "CommonJS",
+
+    // Node.js module resolution
+    "moduleResolution": "Node",
+
+    // Keep strict type checking
+    "strict": true,
+
+    // Speed up compilation
+    "skipLibCheck": true,
+
+    // Useful for importing from CommonJS modules
+    "esModuleInterop": true,
+
+    // Generate declaration files for TypeScript users
+    "declaration": true,
+
+    // Output to dist directory
+    "outDir": "./dist",
+
+    // Preserve documentation comments
+    "removeComments": false,
+
+    // Speed up development
+    "incremental": true
+  },
+  "include": ["xmldoc.ts"],
+  "exclude": ["node_modules", "dist", "lib"]
+}
