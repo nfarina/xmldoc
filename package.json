@@ -6,7 +6,7 @@
     "email": "nfarina@gmail.com",
     "url": "http://nfarina.com"
   },
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0",
   "packageManager": "yarn@4.7.0",
   "type": "commonjs",
   "main": "./lib/xmldoc.js",
