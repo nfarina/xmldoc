@@ -1,41 +1,59 @@
-
 [![Build Status](https://travis-ci.org/nfarina/xmldoc.svg)](https://travis-ci.org/nfarina/xmldoc)
 [![Coverage Status](https://coveralls.io/repos/github/nfarina/xmldoc/badge.svg?branch=master)](https://coveralls.io/github/nfarina/xmldoc?branch=master)
 
 ## Introduction
 
-`xmldoc` lets you parse XML documents with ease. It's a pure-JavaScript, one-file XML document class with a single dependency on the excellent [`sax`][sax] parser.
+`xmldoc` lets you parse XML documents with ease. It's a lightweight XML document class with a single dependency on the excellent [`sax`][sax] parser.
 
 For more on why I wrote this class, see the [blog post][blog].
 
-  [blog]: http://nfarina.com/post/34302964969/a-lightweight-xml-document-class-for-nodejs-javascript
+As of version 2.0, `xmldoc` fully supports TypeScript and can be imported in both CommonJS and ESM environments.
+
+[blog]: http://nfarina.com/post/34302964969/a-lightweight-xml-document-class-for-nodejs-javascript
 
 ## Release Notes
 
-See [CHANGELOG.md](./CHANGELOG.md) for details (built with [GitHub Changelog Generator](https://skywinder.github.io/github-changelog-generator/)).
+See [CHANGELOG.md](./CHANGELOG.md) for details.
 
 ## Installation
 
-    npm install xmldoc
+```bash
+npm install xmldoc
+# or
+yarn add xmldoc
+```
 
 Or just download the repository and include it in your `node_modules` directly. Or just download the [single JS file][blob]!
 
-  [blob]: https://github.com/nfarina/xmldoc/blob/master/lib/xmldoc.js
-
-## Installation - React Native
-
-I haven't tested this myself but [installing `buffer` and `stream` separately](https://github.com/nfarina/xmldoc/issues/38) may be necessary for `xmldoc` to work on React Native:
-
-    npm install buffer stream xmldoc
+[blob]: https://github.com/nfarina/xmldoc/blob/master/lib/xmldoc.js
 
 ## Usage
 
-```js
-var xmldoc = require('xmldoc');
+### CommonJS (Node.js)
 
-var document = new xmldoc.XmlDocument("<some>xml</some>");
+```js
+const { XmlDocument } = require("xmldoc");
+
+const document = new XmlDocument("<some>xml</some>");
 
 // do things
+```
+
+### ESM / TypeScript
+
+```ts
+// ESM environments
+import { XmlDocument } from "xmldoc";
+
+const document = new XmlDocument("<some>xml</some>");
+```
+
+### React Native
+
+If you're using React Native, you may need to install `buffer` and `stream` separately:
+
+```bash
+npm install buffer stream xmldoc
 ```
 
 ## Classes
@@ -46,12 +64,12 @@ Both `XmlElement` and `XmlDocument` contain the same members and methods you can
 
 ## Members
 
-* `name` - the node name, like "tat" for `<tat>`. XML "namespaces" are ignored by the underlying [sax-js](https://github.com/isaacs/sax-js) parser, so you'll simply get "office:body" for `<office:body>`.
-* `attr` - an object dict containing attribute properties, like `bookNode.attr.title` for `<book title="...">`.
-* `val` - the string "value" of the node, if any, like "world" for `<hello>world</hello>`.
-* `children` - an array of `XmlElement` children of the node.
-* `firstChild`, `lastChild` - pretty much what it sounds like; null if no children
-* `line`, `column`, `position`, `startTagPosition` - information about the element's original position in the XML string.
+- `name` - the node name, like "tat" for `<tat>`. XML "namespaces" are ignored by the underlying [sax-js](https://github.com/isaacs/sax-js) parser, so you'll simply get "office:body" for `<office:body>`.
+- `attr` - an object dict containing attribute properties, like `bookNode.attr.title` for `<book title="...">`.
+- `val` - the string "value" of the node, if any, like "world" for `<hello>world</hello>`.
+- `children` - an array of `XmlElement` children of the node.
+- `firstChild`, `lastChild` - pretty much what it sounds like; null if no children
+- `line`, `column`, `position`, `startTagPosition` - information about the element's original position in the XML string.
 
 Each member defaults to a sensible "empty" value like `{}` for `attr`, `[]` for `children`, and `""` for `val`.
 
@@ -122,16 +140,19 @@ This is just an override of the standard JavaScript method, it will give you a s
 The default implementation of `toString()`, that is, the one you get when you just `console.log("Doc: " + myDoc)` will pretty-print the XML with linebreaks and indents. You can pass a couple options to control the output:
 
 ```js
-xml.toString({compressed:true}) // strips indents and linebreaks
-xml.toString({trimmed:true}) // trims long strings for easier debugging
-xml.toString({preserveWhitespace:true}) // prevents whitespace being removed from around element values
+xml.toString({ compressed: true }); // strips indents and linebreaks
+xml.toString({ trimmed: true }); // trims long strings for easier debugging
+xml.toString({ preserveWhitespace: true }); // prevents whitespace from being removed from around element values
+xml.toString({ html: true }); // uses HTML self-closing tag rules for elements without children
 ```
 
 Putting it all together:
 
 ```js
 var xml = "<author><name>looooooong value</name></author>";
-console.log("My document: \n" + new XmlDocument(xml).toString({trimmed:true}))
+console.log(
+  "My document: \n" + new XmlDocument(xml).toString({ trimmed: true }),
+);
 ```
 
 Prints:
@@ -143,9 +164,9 @@ Prints:
 
 ## Feedback
 
-Feel free to file issues or hit me up on [Twitter][twitter].
+Feel free to file issues or hit me up on [X][x].
 
-  [underscore]: http://underscorejs.org
-  [XPath]: http://en.wikipedia.org/wiki/XPath
-  [twitter]: http://twitter.com/nfarina
-  [sax]: https://github.com/isaacs/sax-js
+[underscore]: http://underscorejs.org
+[XPath]: http://en.wikipedia.org/wiki/XPath
+[x]: http://twitter.com/nfarina
+[sax]: https://github.com/isaacs/sax-js
