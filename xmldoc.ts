@@ -168,6 +168,9 @@ export class XmlElement implements XmlNodeBase, XmlDelegate {
   /** Character position of the start tag in the original XML */
   startTagPosition: number | null;
 
+  /** The SAX parser instance (available only during parsing) */
+  parser?: SAXParser;
+
   /**
    * Creates a new XML element
    * @param tag The tag name and attributes
@@ -177,6 +180,15 @@ export class XmlElement implements XmlNodeBase, XmlDelegate {
     tag: { name: string; attributes: Record<string, string> },
     parser?: SAXParser,
   ) {
+    // If you didn't hand us a parser (common case) see if we can grab one
+    // from the current execution stack.
+    if (!parser && delegates.length) {
+      var delegate = delegates[delegates.length - 1];
+
+      if (delegate.parser) {
+        parser = delegate.parser;
+      }
+    }
     this.name = tag.name;
     this.attr = tag.attributes;
     this.val = "";
@@ -208,6 +220,8 @@ export class XmlElement implements XmlNodeBase, XmlDelegate {
     const child = new XmlElement(tag);
     this._addChild(child);
     delegates.unshift(child);
+    // Remove the parser as it is no longer needed and should not be exposed to clients
+    delete this.parser;
   }
 
   _closetag(): void {
