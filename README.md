@@ -3,19 +3,21 @@
 
 ## Introduction
 
-`xmldoc` lets you parse XML documents with ease. It's a lightweight XML document class with a single dependency on the excellent [`sax`][sax] parser.
+`xmldoc` makes parsing XML documents easy. It's a lightweight XML document class with _one_ dependency: the excellent [`sax`][sax] parser.
 
-For more on why I wrote this class, see the [blog post][blog].
+Read my [blog post][blog] to learn why I wrote this XML document class.
 
-As of version 2.0, `xmldoc` fully supports TypeScript and can be imported in both CommonJS and ESM environments.
+Starting from version 2.0, `xmldoc` supports TypeScript, and can be imported in CommonJS and ESM environments.
 
 [blog]: http://nfarina.com/post/34302964969/a-lightweight-xml-document-class-for-nodejs-javascript
 
 ## Release Notes
 
-See [CHANGELOG.md](./CHANGELOG.md) for details.
+Read the [CHANGELOG.md](./CHANGELOG.md) file for the release notes.
 
 ## Installation
+
+Install `xmldoc` with `npm` or `yarn`:
 
 ```bash
 npm install xmldoc
@@ -23,7 +25,9 @@ npm install xmldoc
 yarn add xmldoc
 ```
 
-Or just download the repository and include it in your `node_modules` directly. Or just download the [single JS file][blob]!
+Or download this repository and include it in your `node_modules`.
+
+Or download the [single JS file][blob]!
 
 [blob]: https://github.com/nfarina/xmldoc/blob/master/lib/xmldoc.js
 
@@ -50,7 +54,7 @@ const document = new XmlDocument("<some>xml</some>");
 
 ### React Native
 
-If you're using React Native, you may need to install `buffer` and `stream` separately:
+If you're using React Native, you may need to install `buffer` and `stream` too:
 
 ```bash
 npm install buffer stream xmldoc
@@ -60,7 +64,7 @@ npm install buffer stream xmldoc
 
 The primary exported class is `XmlDocument`, which you'll use to consume your XML text. `XmlDocument` contains a hierarchy of `XmlElement` instances representing the XML structure.
 
-Both `XmlElement` and `XmlDocument` contain the same members and methods you can call to traverse the document or a subtree.
+`XmlElement` and `XmlDocument` have the same members and methods, which you can call to traverse the document or subtree.
 
 ## Members
 
@@ -75,31 +79,33 @@ Each member defaults to a sensible "empty" value like `{}` for `attr`, `[]` for 
 
 ## Methods
 
-All methods with `child` in the name operate only on direct children; they do not do a deep/recursive search.
+All methods with `child` in the name operate only on _direct_ children. Methods with `child` in the name will not perform a deep/recursive search.
 
-It's important to note that `xmldoc` is designed for when you know exactly what you want from your XML file. For instance, it's great for parsing API responses with known structures, but it's not great at teasing things out of HTML documents from the web.
+`xmldoc` works best with _structured_ data as input, like parsing API responses. 
 
-If you need to do lots of searching through your XML document, I highly recommend trying a different library like [node-elementtree](https://github.com/racker/node-elementtree).
+`xmldoc` is not designed to help you extract items from HTML documents from the web.
+If you need to search through your XML document, I recommend trying a different library like [node-elementtree](https://github.com/racker/node-elementtree).
 
 ### eachChild(func)
 
-Similar to [underscore's][underscore] `each` method, it will call `func(child, index, array)` for each child of the given node.
+Similar to [underscore's][underscore] `each` method, it calls `func(child, index, array)` for each child of the given node.
 
 ### childNamed(name)
 
-Pass it the name of a child node and it will search for and return the first one found, or `undefined`.
+Pass it the name of a child node and it will search for and return the _first_ child node it finds.
+Else the response is `undefined`.
 
 ### childrenNamed(name)
 
-Like `childNamed` but returns all matching children in an array, or `[]`.
+Like `childNamed` but returns _all_ matching children in an array, or `[]`.
 
 ### childWithAttribute(name,value)
 
-Searches for the first child with the given attribute value. You can omit `value` to just find the first node with the given attribute defined at all.
+Search for the _first_ child with the given attribute value. Omit the `value` part to find the first node with the given attribute defined.
 
 ### descendantWithPath(path)
 
-Searches for a specific "path" using dot notation. Example:
+Search for a specific "path" using dot notation. For example:
 
 ```xml
 <book>
@@ -111,7 +117,7 @@ Searches for a specific "path" using dot notation. Example:
 </book>
 ```
 
-If you just want the `<name>` node and you have the `XmlElement` for the `<book>` node, you can say:
+If you only want the `<name>` node and you know the `XmlElement` for the `<book>` node, you can do:
 
 ```js
 var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
@@ -119,13 +125,13 @@ var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
 
 ### valueWithPath(path)
 
-Just like `descendantWithPath`, but goes deeper and extracts the `val` of the node. Example:
+Like `descendantWithPath`, but goes deeper and extracts the `val` of the node. For example:
 
 ```js
 var authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
 ```
 
-You can also use the `@` character to request the value of a particular _attribute_ instead:
+Use the `@` character to request the value of a particular _attribute_ instead:
 
 ```js
 var authorIsProper = bookNode.valueWithPath("author.name@isProper"); // return "true"
@@ -135,9 +141,12 @@ This is not [XPath][]! It's just a thing I made up, OK?
 
 ### toString([options])
 
-This is just an override of the standard JavaScript method, it will give you a string representation of your XML document or element. Note that this is for debugging only! It is not guaranteed to always output valid XML.
+For debugging only! This function may return wrongly formatted XML.
 
-The default implementation of `toString()`, that is, the one you get when you just `console.log("Doc: " + myDoc)` will pretty-print the XML with linebreaks and indents. You can pass a couple options to control the output:
+`toString` overrides the standard JavaScript method.
+It returns a string representation of your XML document (or element). .
+
+The default implementation of `toString()`, that is, the one you get when you just `console.log("Doc: " + myDoc)` pretty-prints the XML, with linebreaks and indents. You can pass a couple options to control the output:
 
 ```js
 xml.toString({ compressed: true }); // strips indents and linebreaks
@@ -164,7 +173,7 @@ Prints:
 
 ## Feedback
 
-Feel free to file issues or hit me up on [X][x].
+Feel free to file issues on GitHub, or hit me up on [X][x].
 
 [underscore]: http://underscorejs.org
 [XPath]: http://en.wikipedia.org/wiki/XPath
