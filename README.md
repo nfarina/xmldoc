@@ -64,14 +64,15 @@ Both `XmlElement` and `XmlDocument` contain the same members and methods you can
 
 ## Members
 
-- `name` - the node name, like "tat" for `<tat>`. XML "namespaces" are ignored by the underlying [sax-js](https://github.com/isaacs/sax-js) parser, so you'll simply get "office:body" for `<office:body>`.
-- `attr` - an object dict containing attribute properties, like `bookNode.attr.title` for `<book title="...">`.
-- `val` - the string "value" of the node, if any, like "world" for `<hello>world</hello>`.
-- `children` - an array of `XmlElement` children of the node.
-- `firstChild`, `lastChild` - pretty much what it sounds like; null if no children
-- `line`, `column`, `position`, `startTagPosition` - information about the element's original position in the XML string.
-
-Each member defaults to a sensible "empty" value like `{}` for `attr`, `[]` for `children`, and `""` for `val`.
+| Member name                                      | Default empty value | Description                                                                                                                                                                      |
+| :----------------------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                           |                     | Node name, like "tat" for `<tat>`. XML "namespaces" are ignored by the underlying [sax-js](https://github.com/isaacs/sax-js) parser: so `<office:body>` becomes `"office:body"`. |
+| `attr`                                           | `{}`                | Object dict containing attribute properties. Like `bookNode.attr.title` for `<book title="...">`.                                                                                |
+| `val`                                            | `""`                | String "value" of the node, if any. Like `"world"` for `<hello>world</hello>`.                                                                                                   |
+| `children`                                       | `[]`                | Array of `XmlElement` children of the node.                                                                                                                                      |
+| `firstChild`                                     |                     | What it sounds like. `null` if no children.                                                                                                                                      |
+| `lastChild`                                      |                     | What it sounds like. `null` if no children.                                                                                                                                      |
+| `line`, `column`, `position`, `startTagPosition` |                     | Information about the element's original position in the XML string.                                                                                                             |
 
 ## Methods
 
