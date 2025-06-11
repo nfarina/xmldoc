@@ -46,6 +46,7 @@ describe("Child navigation", () => {
 
     const goodBook = books.childNamed("good-book");
     expect(goodBook?.name).toBe("good-book");
+    expect(goodBook?.position).toBe(26);
 
     const badBook = books.childNamed("bad-book");
     expect(badBook).toBeUndefined();
@@ -59,6 +60,7 @@ describe("Child navigation", () => {
     expect(bookNodes.length).toBe(2);
     expect(bookNodes[0].name).toBe("book");
     expect(bookNodes[1].name).toBe("book");
+    expect(bookNodes[1].position).toBe(21);
   });
 });
 
@@ -71,6 +73,7 @@ describe("Descendant search", () => {
 
     const bookNodes = library.descendantsNamed("book");
     expect(bookNodes.length).toBe(3);
+    expect(bookNodes[1].position).toBe(39);
   });
 
   test("descendantWithPath follows dot notation path", () => {
