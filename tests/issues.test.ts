@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert";
-import { XmlDocument } from "../dist/index.js";
+import { XmlDocument } from "xmldoc";
 
 test("parsing comments outside XML scope [#27]", () => {
   const xmlString = "<hello>world</hello>\n";

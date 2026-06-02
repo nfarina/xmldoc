@@ -1,11 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert";
-import {
-  XmlDocument,
-  XmlTextNode,
-  XmlCDataNode,
-  XmlCommentNode,
-} from "../dist/index.js";
+import { XmlDocument, XmlTextNode, XmlCDataNode, XmlCommentNode } from "xmldoc";
 import type { XmlStringOptions } from "xmldoc";
 
 // Test TypeScript interfaces and types

@@ -1,6 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert";
-import { XmlDocument } from "../dist/index.js";
+import { XmlDocument } from "xmldoc";
 
 describe("Parser Handling", () => {
   test("Position information properties exist", () => {
