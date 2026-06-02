@@ -23,26 +23,11 @@ npm install xmldoc
 yarn add xmldoc
 ```
 
-Or just download the repository and include it in your `node_modules` directly. Or just download the [single JS file][blob]!
-
-[blob]: https://github.com/nfarina/xmldoc/blob/master/lib/xmldoc.js
+Or just download the repository and include it in your `node_modules` directly.
 
 ## Usage
 
-### CommonJS (Node.js)
-
-```js
-const { XmlDocument } = require("xmldoc");
-
-const document = new XmlDocument("<some>xml</some>");
-
-// do things
-```
-
-### ESM / TypeScript
-
 ```ts
-// ESM environments
 import { XmlDocument } from "xmldoc";
 
 const document = new XmlDocument("<some>xml</some>");
@@ -115,7 +100,7 @@ Searches for a specific "path" using dot notation. Example:
 If you just want the `<name>` node and you have the `XmlElement` for the `<book>` node, you can say:
 
 ```js
-var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
+const nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
 ```
 
 ### valueWithPath(path)
@@ -123,13 +108,13 @@ var nameNode = bookNode.descendantWithPath("author.name"); // return <name> node
 Just like `descendantWithPath`, but goes deeper and extracts the `val` of the node. Example:
 
 ```js
-var authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
+const authorName = bookNode.valueWithPath("author.name"); // return "George R. R. Martin"
 ```
 
 You can also use the `@` character to request the value of a particular _attribute_ instead:
 
 ```js
-var authorIsProper = bookNode.valueWithPath("author.name@isProper"); // return "true"
+const authorIsProper = bookNode.valueWithPath("author.name@isProper"); // return "true"
 ```
 
 This is not [XPath][]! It's just a thing I made up, OK?
@@ -150,7 +135,7 @@ xml.toString({ html: true }); // uses HTML self-closing tag rules for elements w
 Putting it all together:
 
 ```js
-var xml = "<author><name>looooooong value</name></author>";
+const xml = "<author><name>looooooong value</name></author>";
 console.log(
   "My document: \n" + new XmlDocument(xml).toString({ trimmed: true }),
 );

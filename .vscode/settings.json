@@ -1,4 +1,4 @@
 {
   // Turn on auto-format by default.
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": true
 }

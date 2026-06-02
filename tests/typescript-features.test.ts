@@ -1,11 +1,12 @@
-import { describe, test, expect } from "vitest";
-import XmlDocument, {
-  XmlElement,
+import { describe, test } from "node:test";
+import assert from "node:assert";
+import {
+  XmlDocument,
   XmlTextNode,
   XmlCDataNode,
   XmlCommentNode,
-  XmlStringOptions,
-} from "../../dist/xmldoc";
+} from "../dist/index.js";
+import type { XmlStringOptions } from "xmldoc";
 
 // Test TypeScript interfaces and types
 describe("TypeScript Interfaces", () => {
@@ -22,7 +23,7 @@ describe("TypeScript Interfaces", () => {
 
     // Should not throw errors
     const result = doc.toString(options);
-    expect(result).toBeDefined();
+    assert.notStrictEqual(result, undefined);
   });
 
   test("Node type checking works properly", () => {
@@ -38,19 +39,19 @@ describe("TypeScript Interfaces", () => {
     for (const child of doc.children) {
       if (child.type === "text") {
         textNodeFound = true;
-        expect(child instanceof XmlTextNode).toBe(true);
+        assert.ok(child instanceof XmlTextNode);
       } else if (child.type === "cdata") {
         cdataNodeFound = true;
-        expect(child instanceof XmlCDataNode).toBe(true);
+        assert.ok(child instanceof XmlCDataNode);
       } else if (child.type === "comment") {
         commentNodeFound = true;
-        expect(child instanceof XmlCommentNode).toBe(true);
+        assert.ok(child instanceof XmlCommentNode);
       }
     }
 
-    expect(textNodeFound).toBe(true);
-    expect(cdataNodeFound).toBe(true);
-    expect(commentNodeFound).toBe(true);
+    assert.strictEqual(textNodeFound, true);
+    assert.strictEqual(cdataNodeFound, true);
+    assert.strictEqual(commentNodeFound, true);
   });
 });
 
@@ -64,8 +65,8 @@ describe("TypeScript Method Usage", () => {
     const missingChild = doc.childNamed("missing");
 
     // This should work with TypeScript's optional chaining
-    expect(foundChild?.val).toBe("text");
-    expect(missingChild?.val).toBeUndefined();
+    assert.strictEqual(foundChild?.val, "text");
+    assert.strictEqual(missingChild?.val, undefined);
   });
 
   test("Proper types for node collections", () => {
@@ -78,7 +79,7 @@ describe("TypeScript Method Usage", () => {
 
     // Should be able to use array methods on the result
     const values = items.map((item) => item.val);
-    expect(values).toEqual(["1", "2", "3"]);
+    assert.deepStrictEqual(values, ["1", "2", "3"]);
   });
 });
 
@@ -89,9 +90,9 @@ describe("Node Creation", () => {
     const doc = new XmlDocument(xmlString);
 
     // Access child as XmlElement type
-    const childElement = doc.childNamed("child") as XmlElement;
-    expect(childElement).toBeDefined();
-    expect(childElement.name).toBe("child");
-    expect(childElement.val).toBe("value");
+    const childElement = doc.childNamed("child");
+    assert.notStrictEqual(childElement, undefined);
+    assert.strictEqual(childElement?.name, "child");
+    assert.strictEqual(childElement?.val, "value");
   });
 });
