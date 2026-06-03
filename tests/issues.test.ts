@@ -3,7 +3,7 @@ import assert from "node:assert";
 import { XmlDocument } from "xmldoc";
 
 test("parsing comments outside XML scope [#27]", () => {
-  const xmlString = "<hello>world</hello>\n";
+  const xmlString = "<hello>world</hello>\n<!--Thank you for your business!-->";
   const parsed = new XmlDocument(xmlString);
 
   // verify that the trailing comment is ignored (no sensible place to put it)

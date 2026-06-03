@@ -1,5 +1,30 @@
 # Change Log
 
+## [v3.0.0](https://github.com/nfarina/xmldoc/tree/v3.0.0) (2026)
+
+**Breaking Changes:**
+
+- **ESM-only.** The package now ships as a native ES module. Import it with
+  `import { XmlDocument } from "xmldoc"`. CommonJS `require("xmldoc")` is no
+  longer supported - if you cannot migrate to ESM, stay on the 2.x line.
+- Removed the legacy browser-global build (`lib/xmldoc.js`). In the browser,
+  import the module from an npm CDN (e.g. `https://esm.sh/xmldoc`).
+- Minimum supported Node.js version is now 22.
+- Removed the `index.js` / `index.d.ts` compatibility shims.
+
+**Other Changes:**
+
+- Single source of truth: the package is built entirely from `src/index.ts`,
+  eliminating the separate hand-written implementation that previously shipped
+  to CommonJS consumers.
+- Fixed a regression where text and comments appearing _before_ the root
+  element (e.g. whitespace after an `<?xml?>` declaration) were incorrectly
+  captured into the document. They are now ignored, matching 1.x behavior.
+- Tests rewritten to use the native Node.js test runner (`node --test`),
+  dropping the `tap` and `vitest` dev dependencies.
+- Added GitHub Actions CI across Linux/macOS/Windows on Node 22, 24, and 26.
+- Updated `sax` to 1.6.0.
+
 ## [v2.0.0](https://github.com/nfarina/xmldoc/tree/v2.0.0) (2024)
 
 **Major Changes:**

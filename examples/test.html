@@ -3,28 +3,31 @@
 <html lang="en">
   <head>
     <title>xmldoc browser test</title>
-    <script
-      type="text/javascript"
-      src="../node_modules/sax/lib/sax.js"
-    ></script>
-    <script type="text/javascript" src="../lib/xmldoc.js"></script>
-    <script type="text/javascript">
+  </head>
+  <body>
+    <!--
+      xmldoc is an ES module. In the browser, import it (and its "sax"
+      dependency) straight from an npm CDN such as esm.sh. There is no longer a
+      browser-global build - use a real module import like the one below.
+    -->
+    <script type="module">
+      import { XmlDocument } from "https://esm.sh/xmldoc";
+
       // Demonstrate parsing an in-memory XML string
-      var xmlString =
+      const xmlString =
         '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
 
-      var suggestions = new XmlDocument(xmlString);
+      const suggestions = new XmlDocument(xmlString);
 
-      // Demonstrate how toString() will pretty-print an abbreviated version of the XML for debugging
+      // Demonstrate how toString() will pretty-print the XML for debugging
       console.log("Parsed: \n" + suggestions);
 
       // Demonstrate a simple eachChild() loop, printing our book titles
-      suggestions.eachChild(function (book) {
-        document.write(
-          "<p>Found book with title: '" + book.attr.title + "'</p>",
-        );
-      });
+      for (const book of suggestions.childrenNamed("book")) {
+        const p = document.createElement("p");
+        p.textContent = `Found book with title: '${book.attr.title}'`;
+        document.body.appendChild(p);
+      }
     </script>
-  </head>
-  <body></body>
+  </body>
 </html>

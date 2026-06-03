@@ -524,6 +524,20 @@ export class XmlDocument extends XmlElement implements XmlDocumentDelegate {
     }
   }
 
+  _text(text: string): void {
+    // Ignore any text that appears before the root element (e.g. whitespace
+    // following an <?xml?> declaration) - there's no sensible place to put it.
+    if (this.name === "") return;
+    super._text(text);
+  }
+
+  _comment(comment: string): void {
+    // Ignore any comment that appears before the root element - there's no
+    // sensible place to put it. See issue #27.
+    if (this.name === "") return;
+    super._comment(comment);
+  }
+
   _doctype(doctype: string): void {
     this.doctype += doctype;
   }
