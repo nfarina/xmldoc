@@ -17,6 +17,11 @@
     // Speed up compilation
     "skipLibCheck": true,
 
+    // This config is for type-checking and editor support only - it must never
+    // emit, or a plain `tsc` would scatter .js files across src/ and tests/.
+    // The build opts back in via tsconfig.build.json.
+    "noEmit": true,
+
     "rootDir": "."
   },
   "include": ["src", "tests"]

@@ -4,6 +4,8 @@
     "esModuleInterop": true,
     "declaration": true,
     "removeComments": false,
+    // Re-enable emit (the base config sets noEmit for type-checking only).
+    "noEmit": false,
     "rootDir": "./src",
     "outDir": "./dist"
   },
