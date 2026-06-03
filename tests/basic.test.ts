@@ -1,25 +1,26 @@
-import { describe, test, expect } from "vitest";
-import XmlDocument, { XmlElement } from "../../dist/xmldoc";
+import { describe, test } from "node:test";
+import assert from "node:assert";
+import { XmlDocument } from "xmldoc";
 
 // Basic XML parsing tests
 describe("XmlDocument parsing", () => {
   test("parses valid XML", () => {
     const xmlString = "<hello>world</hello>";
     const parsed = new XmlDocument(xmlString);
-    expect(parsed).toBeDefined();
+    assert.notStrictEqual(parsed, undefined);
   });
 
   test("throws on empty input", () => {
-    expect(() => {
+    assert.throws(() => {
       // @ts-ignore - Testing empty input
       new XmlDocument();
-    }).toThrow();
+    });
   });
 
   test("throws on whitespace input", () => {
-    expect(() => {
+    assert.throws(() => {
       new XmlDocument("  ");
-    }).toThrow();
+    });
   });
 });
 
@@ -28,13 +29,13 @@ describe("CDATA handling", () => {
   test("preserves CDATA content", () => {
     const xmlString = "<hello><![CDATA[<world>]]></hello>";
     const parsed = new XmlDocument(xmlString);
-    expect(parsed.val).toBe("<world>");
+    assert.strictEqual(parsed.val, "<world>");
   });
 
   test("handles mixed content with CDATA", () => {
     const xmlString = "<hello>(<![CDATA[<world>]]>)</hello>";
     const parsed = new XmlDocument(xmlString);
-    expect(parsed.val).toBe("(<world>)");
+    assert.strictEqual(parsed.val, "(<world>)");
   });
 });
 
@@ -45,11 +46,11 @@ describe("Child navigation", () => {
     const books = new XmlDocument(xmlString);
 
     const goodBook = books.childNamed("good-book");
-    expect(goodBook?.name).toBe("good-book");
-    expect(goodBook?.position).toBe(26);
+    assert.strictEqual(goodBook?.name, "good-book");
+    assert.strictEqual(goodBook?.position, 26);
 
     const badBook = books.childNamed("bad-book");
-    expect(badBook).toBeUndefined();
+    assert.strictEqual(badBook, undefined);
   });
 
   test("childrenNamed finds all matching children", () => {
@@ -57,10 +58,10 @@ describe("Child navigation", () => {
     const books = new XmlDocument(xmlString);
 
     const bookNodes = books.childrenNamed("book");
-    expect(bookNodes.length).toBe(2);
-    expect(bookNodes[0].name).toBe("book");
-    expect(bookNodes[1].name).toBe("book");
-    expect(bookNodes[1].position).toBe(21);
+    assert.strictEqual(bookNodes.length, 2);
+    assert.strictEqual(bookNodes[0].name, "book");
+    assert.strictEqual(bookNodes[1].name, "book");
+    assert.strictEqual(bookNodes[1].position, 21);
   });
 });
 
@@ -72,8 +73,8 @@ describe("Descendant search", () => {
     const library = new XmlDocument(xmlString);
 
     const bookNodes = library.descendantsNamed("book");
-    expect(bookNodes.length).toBe(3);
-    expect(bookNodes[1].position).toBe(39);
+    assert.strictEqual(bookNodes.length, 3);
+    assert.strictEqual(bookNodes[1].position, 39);
   });
 
   test("descendantWithPath follows dot notation path", () => {
@@ -82,11 +83,11 @@ describe("Descendant search", () => {
     const library = new XmlDocument(xmlString);
 
     const book = library.descendantWithPath("section.books.book");
-    expect(book).toBeDefined();
-    expect(book?.attr.id).toBe("1");
+    assert.notStrictEqual(book, undefined);
+    assert.strictEqual(book?.attr.id, "1");
 
     const missing = library.descendantWithPath("section.missing.path");
-    expect(missing).toBeUndefined();
+    assert.strictEqual(missing, undefined);
   });
 
   test("valueWithPath retrieves values from paths", () => {
@@ -95,10 +96,10 @@ describe("Descendant search", () => {
     const library = new XmlDocument(xmlString);
 
     const bookValue = library.valueWithPath("section.book");
-    expect(bookValue).toBe("Harry Potter");
+    assert.strictEqual(bookValue, "Harry Potter");
 
     const bookAttr = library.valueWithPath("section.book@id");
-    expect(bookAttr).toBe("1");
+    assert.strictEqual(bookAttr, "1");
   });
 });
 
@@ -110,12 +111,12 @@ describe("String output", () => {
 
     // Test default output
     const output = doc.toString();
-    expect(output).toContain('<hello name="world">');
-    expect(output).toContain("<child>value</child>");
+    assert.match(output, /<hello name="world">/);
+    assert.match(output, /<child>value<\/child>/);
 
     // Test compressed output
     const compressed = doc.toString({ compressed: true });
-    expect(compressed).not.toContain("\n");
+    assert.doesNotMatch(compressed, /\n/);
   });
 
   test("handles HTML self-closing tags correctly", () => {
@@ -124,8 +125,8 @@ describe("String output", () => {
 
     // Test HTML option
     const output = doc.toString({ html: true });
-    expect(output).toContain("<br/>");
-    expect(output).toContain("<custom></custom>");
+    assert.match(output, /<br\/>/);
+    assert.match(output, /<custom><\/custom>/);
   });
 });
 
@@ -134,8 +135,8 @@ describe("Error handling", () => {
   test("throws on malformed XML", () => {
     const xmlString = "<hello><unclosed-tag></hello>";
 
-    expect(() => {
+    assert.throws(() => {
       new XmlDocument(xmlString);
-    }).toThrow();
+    });
   });
 });

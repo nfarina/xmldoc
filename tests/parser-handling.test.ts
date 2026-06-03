@@ -1,5 +1,6 @@
-import { describe, test, expect } from "vitest";
-import XmlDocument from "../../dist/xmldoc";
+import { describe, test } from "node:test";
+import assert from "node:assert";
+import { XmlDocument } from "xmldoc";
 
 describe("Parser Handling", () => {
   test("Position information properties exist", () => {
@@ -14,27 +15,29 @@ describe("Parser Handling", () => {
 
     // Test that position information is available
     const child = doc.childNamed("child");
-    expect(child).toBeDefined();
+    assert.notStrictEqual(child, undefined);
 
     // These properties should at least exist
-    expect(child).toHaveProperty("line");
-    expect(child).toHaveProperty("column");
-    expect(child).toHaveProperty("position");
-    expect(child).toHaveProperty("startTagPosition");
+    assert.notStrictEqual(child?.line, undefined);
+    assert.notStrictEqual(child?.column, undefined);
+    assert.notStrictEqual(child?.position, undefined);
+    assert.notStrictEqual(child?.startTagPosition, undefined);
 
     // The parser property should be removed after parsing
-    expect(child?.parser).toBeUndefined();
+    // @ts-expect-error
+    assert.strictEqual(child?.parser, undefined);
 
     // Check nested element
     const grandchild = child?.childNamed("grandchild");
-    expect(grandchild).toBeDefined();
-    expect(grandchild).toHaveProperty("line");
-    expect(grandchild).toHaveProperty("column");
-    expect(grandchild).toHaveProperty("position");
-    expect(grandchild).toHaveProperty("startTagPosition");
+    assert.notStrictEqual(grandchild, undefined);
+    assert.notStrictEqual(grandchild?.line, undefined);
+    assert.notStrictEqual(grandchild?.column, undefined);
+    assert.notStrictEqual(grandchild?.position, undefined);
+    assert.notStrictEqual(grandchild?.startTagPosition, undefined);
 
     // The parser property should be removed after parsing
-    expect(grandchild?.parser).toBeUndefined();
+    // @ts-expect-error
+    assert.strictEqual(grandchild?.parser, undefined);
   });
 
   test("Parser property is properly cleaned up", () => {
@@ -43,7 +46,7 @@ describe("Parser Handling", () => {
 
     // After parsing is complete, all parser references should be removed
     const checkNoParser = (element: any) => {
-      expect(element.parser).toBeUndefined();
+      assert.strictEqual(element.parser, undefined);
 
       if (element.children) {
         element.children.forEach((child: any) => {
@@ -65,24 +68,26 @@ describe("Parser Handling", () => {
 
     // Navigate to elements
     const level1 = doc.childNamed("level1");
-    expect(level1).toBeDefined();
+    assert.notStrictEqual(level1, undefined);
 
     const level2 = level1?.childNamed("level2");
-    expect(level2).toBeDefined();
+    assert.notStrictEqual(level2, undefined);
 
     // These properties should at least exist
-    expect(level1).toHaveProperty("line");
-    expect(level1).toHaveProperty("column");
-    expect(level1).toHaveProperty("position");
-    expect(level1).toHaveProperty("startTagPosition");
+    assert.notStrictEqual(level1?.line, undefined);
+    assert.notStrictEqual(level1?.column, undefined);
+    assert.notStrictEqual(level1?.position, undefined);
+    assert.notStrictEqual(level1?.startTagPosition, undefined);
 
-    expect(level2).toHaveProperty("line");
-    expect(level2).toHaveProperty("column");
-    expect(level2).toHaveProperty("position");
-    expect(level2).toHaveProperty("startTagPosition");
+    assert.notStrictEqual(level2?.line, undefined);
+    assert.notStrictEqual(level2?.column, undefined);
+    assert.notStrictEqual(level2?.position, undefined);
+    assert.notStrictEqual(level2?.startTagPosition, undefined);
 
     // The parser property should be removed after parsing
-    expect(level1?.parser).toBeUndefined();
-    expect(level2?.parser).toBeUndefined();
+    // @ts-expect-error
+    assert.strictEqual(level1?.parser, undefined);
+    // @ts-expect-error
+    assert.strictEqual(level2?.parser, undefined);
   });
 });

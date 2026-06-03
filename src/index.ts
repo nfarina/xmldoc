@@ -1,4 +1,5 @@
-import sax, { SAXParser } from "sax";
+import sax from "sax";
+import type { SAXParser } from "sax";
 
 /**
  * Options for XML string output formatting

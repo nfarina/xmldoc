@@ -1,10 +1,8 @@
-
-// Designed to be run from Node.js - i.e. "node example.js"
-
-var XmlDocument = require('../lib/xmldoc').XmlDocument;
+import { XmlDocument } from "xmldoc";
 
 // Demonstrate parsing an in-memory XML string
-var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
+var xmlString =
+  '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
 
 var suggestions = new XmlDocument(xmlString);
 
@@ -12,17 +10,22 @@ var suggestions = new XmlDocument(xmlString);
 console.log("Parsed: \n%s", suggestions);
 
 // Demonstrate a simple eachChild() loop, printing our book titles
-suggestions.eachChild(function(book) {
+suggestions.eachChild(function (book) {
   console.log("Found book with title: '%s'", book.attr.title);
-  console.log("==> The <book> tag started at position %s and the complete element ended at line %s, column %s, position %s.", book.startTagPosition, book.line, book.column, book.position);
+  console.log(
+    "==> The <book> tag started at position %s and the complete element ended at line %s, column %s, position %s.",
+    book.startTagPosition,
+    book.line,
+    book.column,
+    book.position,
+  );
 });
 
 // Now load an XML file from disk and parse it
-var fs = require('fs'),
-    path = require('path');
+var fs = require("fs"),
+  path = require("path");
 
-fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
-  
+fs.readFile(path.join(__dirname, "test.xml"), "utf8", function (err, data) {
   if (err) {
     return console.log(err);
   }
@@ -31,13 +34,20 @@ fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
   var results = new XmlDocument(data);
 
   // Demonstrate toString() with an option to abbreviate long strings and compress the output
-  console.log("Parsed: \n%s", results.toString({trimmed:true, compressed:true}));
+  console.log(
+    "Parsed: \n%s",
+    results.toString({ trimmed: true, compressed: true }),
+  );
 
   // Pull out the <books> node
   var books = results.childNamed("books");
 
   // Demonstrate firstChild/lastChild
-  console.log("First book has ISBN '%s', last book has ISBN '%s'", books.firstChild.attr.isbn, books.lastChild.attr.isbn);
+  console.log(
+    "First book has ISBN '%s', last book has ISBN '%s'",
+    books.firstChild.attr.isbn,
+    books.lastChild.attr.isbn,
+  );
 
   // Print out the ISBNs
   books.eachChild(function (book) {
@@ -51,10 +61,13 @@ fs.readFile(path.join(__dirname, "test.xml"), 'utf8', function (err,data) {
   console.log("Found %s books.", allBooks.length);
 
   // Search for a particular book
-  var twilight = books.childWithAttribute("isbn","478-2-23-765712-2");
+  var twilight = books.childWithAttribute("isbn", "478-2-23-765712-2");
 
   // Result is a single XmlElement instance for <book>
-  console.log("Title of book with given ISBN: '%s'", twilight.valueWithPath("title"));
+  console.log(
+    "Title of book with given ISBN: '%s'",
+    twilight.valueWithPath("title"),
+  );
 
   return null;
 });

@@ -1,7 +1,4 @@
 {
-  "//": [
-    "glob is set to ^13.0.0 to fix a security vulnerability in the previous version"
-  ],
   "name": "xmldoc",
   "description": "A lightweight XML Document class for JavaScript.",
   "author": {
@@ -11,42 +8,25 @@
   },
   "version": "2.0.3",
   "packageManager": "yarn@4.12.0",
-  "type": "commonjs",
-  "main": "./lib/xmldoc.js",
-  "types": "./dist/xmldoc.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/xmldoc.d.ts",
-      "import": "./dist/xmldoc.js",
-      "require": "./lib/xmldoc.js",
-      "default": "./lib/xmldoc.js"
-    }
-  },
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
   "files": [
-    "dist/*.js",
-    "dist/*.d.ts",
-    "dist/*.map",
-    "lib",
-    "LICENSE",
-    "README.md",
-    "CHANGELOG.md",
-    "index.js",
-    "index.d.ts"
+    "dist"
   ],
   "scripts": {
-    "test": "yarn test:js || true && yarn test:ts",
-    "test:js": "tap test/*.js",
-    "test:ts": "vitest run test/ts",
+    "test": "node --test",
     "coverage": "npm test:js -- --cov --coverage-report=html",
     "clean": "rm -rf dist",
-    "build": "tsc --sourceMap",
-    "prepublishOnly": "npm run clean && npm run build",
+    "build": "npm run clean && tsc -p ./tsconfig.build.json",
+    "prepublishOnly": "npm run build",
     "format": "prettier --write ."
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nfarina/xmldoc.git"
+    "url": "git+https://github.com/nfarina/xmldoc.git"
   },
   "contributors": [
     {
@@ -58,22 +38,16 @@
       "email": "calebmeredith8@gmail.com"
     }
   ],
-  "readmeFilename": "README.md",
   "dependencies": {
-    "sax": "^1.4.3"
+    "sax": "^1.6.0"
   },
   "devDependencies": {
-    "@types/sax": "^1.2.7",
-    "prettier": "^3.7.4",
-    "tap": "^21.5.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.15"
+    "@types/sax": "1.2.7",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3"
   },
   "engines": {
-    "node": ">=12.0.0"
-  },
-  "resolutions": {
-    "glob": "^13.0.0"
+    "node": ">=22.0.0"
   },
   "keywords": [
     "xml",
