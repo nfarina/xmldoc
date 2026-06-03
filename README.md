@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/nfarina/xmldoc.svg)](https://travis-ci.org/nfarina/xmldoc)
-[![Coverage Status](https://coveralls.io/repos/github/nfarina/xmldoc/badge.svg?branch=master)](https://coveralls.io/github/nfarina/xmldoc?branch=master)
+[![CI](https://github.com/nfarina/xmldoc/actions/workflows/ci.yml/badge.svg)](https://github.com/nfarina/xmldoc/actions/workflows/ci.yml)
 
 ## Introduction
 
@@ -7,7 +6,7 @@
 
 For more on why I wrote this class, see the [blog post][blog].
 
-As of version 2.0, `xmldoc` fully supports TypeScript and can be imported in both CommonJS and ESM environments.
+`xmldoc` is written in TypeScript and ships full type definitions. As of version 3.0 it is published as an ESM-only package (`import` only); if you need CommonJS `require()` support, stay on the 2.x line.
 
 [blog]: http://nfarina.com/post/34302964969/a-lightweight-xml-document-class-for-nodejs-javascript
 
@@ -22,8 +21,6 @@ npm install xmldoc
 # or
 yarn add xmldoc
 ```
-
-Or just download the repository and include it in your `node_modules` directly.
 
 ## Usage
 
@@ -135,7 +132,8 @@ xml.toString({ html: true }); // uses HTML self-closing tag rules for elements w
 Putting it all together:
 
 ```js
-const xml = "<author><name>looooooong value</name></author>";
+const xml =
+  "<author><name>Lorem ipsum dolor sit amet, consectetur</name></author>";
 console.log(
   "My document: \n" + new XmlDocument(xml).toString({ trimmed: true }),
 );
@@ -143,10 +141,10 @@ console.log(
 
 Prints:
 
-    My Document:
-    <hello>
-      loooooooo…
-    </hello>
+    My document:
+    <author>
+      <name>Lorem ipsum dolor sit ame…</name>
+    </author>
 
 ## Feedback
 
