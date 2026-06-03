@@ -1,5 +1,5 @@
 // Designed to be run from Node.js - i.e. "node example.js"
-// (run `yarn build` first so the "xmldoc" package resolves to ./dist).
+// (run `npm run build` first so the "xmldoc" package resolves to ./dist).
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";

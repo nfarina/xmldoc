@@ -5,6 +5,4 @@ node_modules/
 
 dist/
 
-.yarn/
-
 *.tsbuildinfo
