@@ -28,7 +28,8 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc -p ./tsconfig.build.json",
     "prepublishOnly": "npm run build",
-    "format": "prettier --write ."
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "license": "MIT",
   "repository": {
@@ -50,7 +51,7 @@
   },
   "devDependencies": {
     "@types/sax": "1.2.7",
-    "prettier": "3.8.3",
+    "oxfmt": "^0.53.0",
     "typescript": "6.0.3"
   },
   "engines": {
